@@ -36,6 +36,8 @@ def predict_depth(model, image):
     return depth_im
 
 
+##### 
+
 
 ##### filepaths #####
 # filedir = "C:/Users/ARajaraman/OneDrive - SharkNinja/Documents/pythontests/ZoeDepth/Intel_data/"
