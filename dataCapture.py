@@ -77,6 +77,13 @@ else:
 
 
 
+
+# Start streaming
+profile = pipeline.start(config)
+s = serial.Serial('COM4')
+
+
+
 ct = datetime.datetime.now()
 
 foldername = str(ct.year)+"_"+str(ct.month)+"_"+str(ct.day)+"_"+str(ct.hour)+"_"+str(ct.minute)+"_"+str(ct.second)
@@ -94,10 +101,6 @@ if pc_flag:
 mode_list = []
 image_counter = 0
 
-
-# Start streaming
-profile = pipeline.start(config)
-s = serial.Serial('COM4')
 
 # Getting the depth sensor's depth scale (see rs-align example for explanation)
 depth_sensor = profile.get_device().first_depth_sensor()

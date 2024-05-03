@@ -236,13 +236,13 @@ class ZoeDepth(DepthModel):
         return param_conf
 
     @staticmethod
-    def build(midas_model_type="DPT_BEiT_L_384", pretrained_resource=None, use_pretrained_midas=False, train_midas=False, freeze_midas_bn=True, **kwargs):
+    def build(midas_model_type="DPT_BEiT_L_384", pretrained_resource="local::C:/Users/ARajaraman/OneDrive - SharkNinja/Documents/Spring24/repos/ZoeDepth/ZoeD_M12_N.pt", use_pretrained_midas=False, train_midas=False, freeze_midas_bn=True, **kwargs):
         core = MidasCore.build(midas_model_type=midas_model_type, use_pretrained_midas=use_pretrained_midas,
                                train_midas=train_midas, fetch_features=True, freeze_bn=freeze_midas_bn, **kwargs)
         model = ZoeDepth(core, **kwargs)
         if pretrained_resource:
             assert isinstance(pretrained_resource, str), "pretrained_resource must be a string"
-            model = load_state_from_resource(model, pretrained_resource)
+            model = load_state_from_resource(model, "local::C:/Users/ARajaraman/OneDrive - SharkNinja/Documents/Spring24/repos/ZoeDepth/ZoeD_M12_N.pt")
         return model
 
     @staticmethod

@@ -38,9 +38,10 @@ def predict_depth(model, image):
 
 
 ##### filepaths #####
-filedir = "C:/Users/ARajaraman/OneDrive - SharkNinja/Documents/pythontests/ZoeDepth/Intel_data/"
+# filedir = "C:/Users/ARajaraman/OneDrive - SharkNinja/Documents/pythontests/ZoeDepth/Intel_data/"
+filedir = "Intel_data/"
 # date_folder = "2024_4_17_17_2_3/"
-date_folder = "2024_4_23_14_36_30/"
+date_folder = "2024_5_1_14_51_41/"
 file_number = 0
 
 
