@@ -36,7 +36,17 @@ def predict_depth(model, image):
     return depth_im
 
 
-##### 
+
+##### Mouse Click Event #####
+
+right_clicks = list()
+
+def mouse_callback(event, x, y, flags, params):
+    if event == 1:
+        global right_clicks
+        right_clicks.append([x, y])
+        print(right_clicks[-1])
+
 
 
 ##### filepaths #####
@@ -185,7 +195,11 @@ subfolder = "images/"
 im_path = filedir + date_folder + subfolder + str(file_number) + "_raw.jpg"
 
 input_image = np.array(PIL.Image.open(im_path))
+
+cv2.namedWindow('Input image', cv2.WINDOW_NORMAL)
+cv2.setMouseCallback('Input image', mouse_callback)
 cv2.imshow('Input image', cv2.cvtColor(input_image, cv2.COLOR_BGR2RGB))
+
 cv2.waitKey(0)
 
 
@@ -242,8 +256,8 @@ print(distance_lidar)
 lidar_h_im = ((dy*f_cam)/(distance_lidar - dz))/pixel_to_mm
 lidar_w_im = ((lidar_rgbCAM*f_cam)/(distance_lidar - dz))/pixel_to_mm
 
-print(lidar_h_im)
-print(lidar_w_im)
+# print(lidar_h_im)
+# print(lidar_w_im)
 
 color = [0, 255, 0]
 lidar_on_image = [int(lidar_w_im), int(lidar_h_im)]
@@ -251,6 +265,7 @@ start_l = (centre[0]+lidar_on_image[0]-2, centre[1]-lidar_on_image[1]-2)
 end_l = (centre[0]+lidar_on_image[0]+2, centre[1]-lidar_on_image[1]+2)
 thickness = 2
 
+print([centre[0]+lidar_on_image[0], centre[1]-lidar_on_image[1]])
 
 pred_rect = cv2.rectangle(pred_color, start_l, end_l, color, thickness)
 cv2.imshow('ZoeDpeth', cv2.cvtColor(pred_rect, cv2.COLOR_BGR2RGB))
