@@ -54,7 +54,7 @@ def mouse_callback(event, x, y, flags, params):
 filedir = "Intel_data/"
 # date_folder = "2024_4_17_17_2_3/"
 date_folder = "2024_5_1_14_51_41/"
-file_number = 0
+file_number = 2
 
 
 ##### CAMERA paramters #####
@@ -69,14 +69,12 @@ pixel_to_mm = sensor_height/image_height
 
 
 
-
 ##### lidar-camera transform parameters ####
 dx = 0
 dy = 27.6
 dz = 53.63
 
 lidar_rgbCAM = 32.5 #b
-
 
 
 
@@ -171,18 +169,26 @@ print(len(angF))
 for ii in range(100, len(angF)):
     # if(angF[ii]>225 and angF[ii]<315):
     if(angF[ii]>225 and angF[ii]<315):
-        angPlot.append(angR[ii])
-        distPlot.append(rangC[ii])
+        # angPlot.append(-1*angR[ii] - (83*math.pi/180))
+        # distPlot.append(rangC[ii])
+
+        distcalc = math.sqrt(rangC[ii]*rangC[ii] + 62.71*62.71 -2*rangC[ii]*62.71*math.cos((angR[ii])-0.545))
+        angcalc = math.asin((rangC[ii]/distcalc)*math.sin(abs((angR[ii]) - 0.545)))
+        angPlot.append(-1*angcalc)
+        distPlot.append(distcalc)
+
         scanCnt= 1
     elif (scanCnt == 1):
         break
 
+# for ii in range(100, len(angF)):
+    
 
 # plt.axes(projection = 'polar')
 ax = plt.subplot(111, projection='polar')
 #plotting the second scan data points in a polar plot
 # fig1 = plt.figure(1)
-ax.set_theta_direction(-1)
+ax.set_theta_direction(1)
 plt.plot(angPlot, distPlot)
 plt.title('3i LiDAR distance plot')
 plt.show()
